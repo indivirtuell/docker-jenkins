@@ -35,4 +35,5 @@ jobs:
           context: .
           push: true
           sbom: true
+          provenance: mode=max
           tags: synec/docker-jenkins:latest
