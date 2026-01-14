@@ -6,7 +6,7 @@ USER root
 
 RUN apt --allow-releaseinfo-change-suite update
 
-RUN apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common chromium rsync gettext-base xvfb jq
+RUN apt install -y apt-transport-https ca-certificates curl gnupg2 chromium rsync gettext-base xvfb jq
 
 RUN apt dist-upgrade -y
 
