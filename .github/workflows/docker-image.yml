@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       # Only relevant for the nightly run: rebuild when the upstream Jenkins
       # image has moved. Pushes and manual runs always build, otherwise merged
@@ -20,7 +20,7 @@ jobs:
       - name: Check if base image updated
         id: check
         if: github.event_name == 'schedule'
-        uses: lucacome/docker-image-update-checker@v3.1.0
+        uses: lucacome/docker-image-update-checker@v3.1.1
         with:
           base-image: jenkins/jenkins:jdk21
           image: synec/docker-jenkins:latest
