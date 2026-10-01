@@ -72,7 +72,7 @@ RUN set -euxo pipefail; \
 # ---------------------------------------------------------------------------
 # Final image
 # ---------------------------------------------------------------------------
-FROM jenkins/jenkins:jdk21
+FROM jenkins/jenkins:jdk25
 
 LABEL org.opencontainers.image.authors="indivirtuell <office@indivirtuell.net>"
 LABEL org.opencontainers.image.source="https://github.com/indivirtuell/docker-jenkins"

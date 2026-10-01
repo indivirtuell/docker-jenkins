@@ -1,6 +1,6 @@
 # Jenkins Docker Image
 
-A Jenkins controller image based on `jenkins/jenkins:jdk21` (Debian 13 "trixie"),
+A Jenkins controller image based on `jenkins/jenkins:jdk25` (Debian 13 "trixie"),
 extended with the tooling our pipelines need: Kubernetes deployment, SOPS/age
 secret decryption, and headless browser testing.
 
