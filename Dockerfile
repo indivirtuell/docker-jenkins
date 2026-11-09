@@ -24,7 +24,7 @@ RUN set -euxo pipefail; \
 
 # Install cosign, verified against its pinned checksum.
 RUN set -euxo pipefail; \
-    curl -fsSLo /usr/local/bin/cosign \
+    curl -fsSL --retry 3 --retry-all-errors -o /usr/local/bin/cosign \
       "https://github.com/sigstore/cosign/releases/download/${COSIGN_VERSION}/cosign-linux-amd64"; \
     echo "${COSIGN_SHA256}  /usr/local/bin/cosign" | sha256sum -c -; \
     chmod 0755 /usr/local/bin/cosign; \
@@ -42,15 +42,15 @@ RUN set -euxo pipefail; \
 # verified checksum. Any failure in this chain aborts the build.
 WORKDIR /tmp
 RUN set -euxo pipefail; \
-    SOPS_VERSION="$(curl -fsSI https://github.com/getsops/sops/releases/latest \
+    SOPS_VERSION="$(curl -fsSI --retry 3 --retry-all-errors https://github.com/getsops/sops/releases/latest \
       | tr -d '\r' \
       | sed -n 's#^location:.*/tag/\(v[^ ]*\)$#\1#Ip')"; \
     test -n "${SOPS_VERSION}"; \
     echo "Resolved sops ${SOPS_VERSION}"; \
     base="https://github.com/getsops/sops/releases/download/${SOPS_VERSION}"; \
-    curl -fsSLO "${base}/sops-${SOPS_VERSION}.linux.amd64"; \
-    curl -fsSLO "${base}/sops-${SOPS_VERSION}.checksums.txt"; \
-    curl -fsSLO "${base}/sops-${SOPS_VERSION}.checksums.sigstore.json"; \
+    curl -fsSLO --retry 3 --retry-all-errors "${base}/sops-${SOPS_VERSION}.linux.amd64"; \
+    curl -fsSLO --retry 3 --retry-all-errors "${base}/sops-${SOPS_VERSION}.checksums.txt"; \
+    curl -fsSLO --retry 3 --retry-all-errors "${base}/sops-${SOPS_VERSION}.checksums.sigstore.json"; \
     cosign verify-blob \
       --bundle "sops-${SOPS_VERSION}.checksums.sigstore.json" \
       --certificate-identity-regexp '^https://github\.com/getsops/sops/\.github/workflows/release\.yml@refs/tags/v.+$' \

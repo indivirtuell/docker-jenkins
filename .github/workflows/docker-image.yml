@@ -22,7 +22,7 @@ jobs:
         if: github.event_name == 'schedule'
         uses: lucacome/docker-image-update-checker@v3.1.1
         with:
-          base-image: jenkins/jenkins:jdk21
+          base-image: jenkins/jenkins:jdk25
           image: synec/docker-jenkins:latest
           platforms: linux/amd64
 
